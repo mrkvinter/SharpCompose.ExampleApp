@@ -43,7 +43,7 @@ public static class Navigation
                                         Box(Modifier.FillMaxWidth().Height(40)
                                                 .Clickable(() => isOpen.Value = false),
                                             alignment: Alignment.Center, content: () => itemContent());
-                                        Spacer(Modifier.Size(12));
+                                        Spacer(Modifier.Size(6));
                                     });
                                 });
                         });
@@ -60,14 +60,14 @@ public static class Navigation
                                 alignment: Alignment.Center, content: () => itemContent());
                             Spacer(Modifier.Size(12));
                         });
-                        Spacer(Modifier.Size(24));
+                        Spacer(Modifier.Size(30));
                     }); // desktop
             },
             (measures, constraints) =>
             {
                 var placeable = constraints switch
                 {
-                    {MaxWidth: < 540} => measures[0].Measure(constraints),
+                    {MaxWidth: < 576} => measures[0].Measure(constraints),
                     _ => measures[1].Measure(constraints)
                 };
 

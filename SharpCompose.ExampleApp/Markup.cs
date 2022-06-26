@@ -31,19 +31,22 @@ public static partial class Markup
 
                             Header(page, isLight);
 
-                            Box(Modifier.FillMaxWidth().FillMaxHeight().Padding(30, 15),
-                                alignment: Alignment.TopStart, content: () =>
-                                {
-                                    switch (page.Value)
+                            Box(Modifier.FillMaxWidth(), alignment: Alignment.TopCenter, content: () =>
+                                Box(
+                                    Modifier.Container().FillMaxHeight()
+                                        .Padding(30, 15),
+                                    alignment: Alignment.TopStart, content: () =>
                                     {
-                                        case 0:
-                                            Home();
-                                            break;
-                                        case 1:
-                                            Counter();
-                                            break;
-                                    }
-                                });
+                                        switch (page.Value)
+                                        {
+                                            case 0:
+                                                Home();
+                                                break;
+                                            case 1:
+                                                Counter();
+                                                break;
+                                        }
+                                    }));
                         });
                 });
 
@@ -57,18 +60,21 @@ public static partial class Markup
                 .FillMaxWidth().Height(50)
                 .Shadow(Color.Black.WithAlpha(0.1f), new IntOffset(0, 1), 8)
                 .BackgroundColor(LocalAdditionalColorsProvider.Instance.Value.SolidBackground),
-            alignment: Alignment.CenterStart, content: () =>
+            alignment: Alignment.Center, content: () =>
             {
-                Row(Modifier.FillMaxHeight().Padding(start: 12), Alignment.Center, content: () =>
+                Box(Modifier.FillMaxHeight().Container(Container.ExtraExtraLarge), Alignment.CenterStart, () =>
                 {
-                    Icon(LocalAppIconProvider.Instance.Value.Logo);
-                    Spacer(Modifier.Width(6));
-                    Text("Example App", size: 18);
+                    Row(Modifier.FillMaxHeight().Padding(start: 12), Alignment.Center, content: () =>
+                    {
+                        Icon(LocalAppIconProvider.Instance.Value.Logo);
+                        Spacer(Modifier.Width(6));
+                        Text("Example App", size: 18);
+                    });
+
+                    NavigationButtons(page, isLight);
                 });
                 Box(Modifier.FillMaxHeight().FillMaxWidth(), alignment: Alignment.BottomCenter, content: () =>
                     Box(Modifier.FillMaxWidth().Height(2).BackgroundColor(Color.Black.WithAlpha(0.15f))));
-
-                NavigationButtons(page, isLight);
             });
 
     private static void NavigationButtons(ValueRemembered<int> page, ValueRemembered<bool> isLight)
@@ -105,14 +111,14 @@ public static partial class Markup
         });
     }
 
-    private static void Home() => Column(content: () =>
+    private static void Home() => Column(Modifier.FillMaxWidth(), content: () =>
     {
         Text("Hello Sharp.Compose!", size: 32);
         Spacer(Modifier.Height(8));
         Text("Welcome to Sharp.Compose example app!");
     });
 
-    private static void Counter() => Column(content: () =>
+    private static void Counter() => Column(Modifier.FillMaxWidth(), content: () =>
     {
         var counter = Remember.Get(0);
         Text("Counter", size: 32);
