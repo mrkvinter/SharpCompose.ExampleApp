@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "SharpCompose.ExampleApp (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "SharpCompose.ExampleApp (Unpackaged)": {
+      "commandName": "Project"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    }
+  }
+}
